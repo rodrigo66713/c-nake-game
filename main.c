@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <conio.h>
 
-#define WALL_SIZE_LENGTH 31
-#define WALL_SIZE_WIDTH 16
+#include "playable-area.h"
 
 //Function Prototypes 
 void getControls(char key_pressed);
-void setPlayableArea();
-void drawPlayableArea();
 
 // Main Menu
 int main() {
@@ -17,48 +14,19 @@ int main() {
     printf("=================== WELCOME TO C-NAKE GAME ====================\n");
     printf("===============================================================\n");
 
-    printf("\nPress any key to start . . .\n");
-    system("pause > nul");
-    system("cls");
+    printf("\nPress ENTER to start . . .\n");
+    getchar();
 
     printf("Use WASD or ARROW KEYS to play: \n");
-    setPlayableArea(); 
+    setPlayableArea();
 
-    while(1){
-        //kbhit(): Function in <conio.h> that gets when a key is pressed on the keyboard.
+    while(1){        
+        //kbhit(): Function in conio.h that gets when a key is pressed on the keyboard.
         if(kbhit()){
             key_pressed = getch();
 
             getControls(key_pressed);
         } 
-    }
-}
-
-/*
-This function set the playable area where C-Nake will move, such as ground and walls.
-*/
-void setPlayableArea() {
-    char playable_area[WALL_SIZE_LENGTH][WALL_SIZE_WIDTH];
-    
-    for (int width = 0; width < WALL_SIZE_WIDTH; width++) {
-        for (int length = 0; length < WALL_SIZE_LENGTH; length++) {
-            if ((length == 0 || length == WALL_SIZE_LENGTH - 1) || (width == 0 || width == WALL_SIZE_WIDTH - 1)) {
-                playable_area[length][width] = '#';
-            } else {
-                playable_area[length][width] = ' ';
-            }
-        }
-    }
-
-    drawPlayableArea(playable_area); 
-}
-
-void drawPlayableArea(char playable_area[WALL_SIZE_LENGTH][WALL_SIZE_WIDTH]) {
-    for (int width = 0; width < WALL_SIZE_WIDTH; width++) {
-        for (int length = 0; length < WALL_SIZE_LENGTH; length++) {
-            printf("%c", playable_area[length][width]);
-        }
-        printf("\n");
     }
 }
 
